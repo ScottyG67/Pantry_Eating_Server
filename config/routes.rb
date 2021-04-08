@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   
   namespace :api do
     namespace :v1 do
-      resources :users, only: [:create]
+      resources :users
+      resources :pantry_categories
+      resources :pantry_items
       post '/login', to: 'auth#create'
       get '/profile', to: 'users#profile'
     end
