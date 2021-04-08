@@ -5,3 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+User.destroy_all
+PantryCategory.destroy_all
+PantryItem.destroy_all
+
+user1 = User.create(username: "Swedish Chef", password: "password")
+
+category0 = PantryCategory.create(name: "None")
+category1 = PantryCategory.create(name: "Freezer")
+category2 = PantryCategory.create(name: "Fridge")
+category3 = PantryCategory.create(name: "Fruit/Veggie")
+category4 = PantryCategory.create(name: "Meat")
+category5 = PantryCategory.create(name: "Packaged")
+
+item2 = PantryItem.create(name:"Peanut Butter", description: "Creamy", upc: "051500720011", user: user1, pantry_category: category5)

@@ -5,9 +5,12 @@ Rails.application.routes.draw do
       resources :users
       resources :pantry_categories
       resources :pantry_items
+      resources :recipes
       post '/login', to: 'auth#create'
       get '/profile', to: 'users#profile'
     end
   end
+
+  
 
 end 

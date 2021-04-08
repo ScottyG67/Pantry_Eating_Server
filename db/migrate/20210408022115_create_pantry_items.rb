@@ -6,7 +6,6 @@ class CreatePantryItems < ActiveRecord::Migration[6.1]
       t.string :name
       t.text :description
       t.string :upc
-
       t.timestamps
     end
   end
