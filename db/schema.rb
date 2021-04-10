@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_08_203204) do
+ActiveRecord::Schema.define(version: 2021_04_09_195539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,34 @@ ActiveRecord::Schema.define(version: 2021_04_08_203204) do
     t.index ["user_id"], name: "index_pantry_items_on_user_id"
   end
 
+  create_table "recipes", force: :cascade do |t|
+    t.decimal "calories"
+    t.string "cautions", array: true
+    t.string "cuisineType", array: true
+    t.string "dietLabels", array: true
+    t.json "digest", array: true
+    t.string "dishType", array: true
+    t.string "healthLabels", array: true
+    t.string "image"
+    t.string "ingredientLines", array: true
+    t.json "ingredients", array: true
+    t.string "label"
+    t.string "meanType", array: true
+    t.string "shareAs"
+    t.string "source"
+    t.json "totalDaily"
+    t.json "totalNutrients"
+    t.integer "totalTime"
+    t.decimal "totalWeight"
+    t.string "uri"
+    t.string "url"
+    t.integer "yield"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_recipes_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -44,4 +72,5 @@ ActiveRecord::Schema.define(version: 2021_04_08_203204) do
 
   add_foreign_key "pantry_items", "pantry_categories"
   add_foreign_key "pantry_items", "users"
+  add_foreign_key "recipes", "users"
 end

@@ -15,9 +15,6 @@ class Api::V1::UsersController < ApplicationController
       end
     end
 
-    def index
-      byebug
-    end
   
     private
   

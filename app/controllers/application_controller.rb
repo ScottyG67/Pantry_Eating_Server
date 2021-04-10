@@ -2,20 +2,16 @@ class ApplicationController < ActionController::API
 
     before_action :authorized
 
-    def encode_token(payload)
-        # payload => { key: 'value' }
-        
+    def encode_token(payload)        
         JWT.encode(payload, ENV['AUTH_SECRET_KEY'])
     end
     
     def auth_header
-        
         #looking for 'Authorization': 'Bearer <token>' in headers: {...}
         request.headers['Authorization']
     end
     
     def decoded_token
-        
         if auth_header
             token = auth_header.split(' ')[1]
             begin
@@ -27,10 +23,9 @@ class ApplicationController < ActionController::API
     end
 
     def current_user
-        
         if decoded_token
-          user_id = decoded_token['user_id']
-          @user = User.find_by(id: user_id)
+            user_id = decoded_token['user_id']
+            @user = User.find_by(id: user_id)
         end
     end
     
@@ -39,7 +34,6 @@ class ApplicationController < ActionController::API
     end
 
     def authorized
-        
         render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
     end
 

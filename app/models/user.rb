@@ -3,6 +3,7 @@ class User < ApplicationRecord
     validates :email, uniqueness: { case_sensitive: false }
 
     has_many :pantry_items, dependent: :destroy
+    has_many :recipes, dependent: :destroy
 
     
 end
