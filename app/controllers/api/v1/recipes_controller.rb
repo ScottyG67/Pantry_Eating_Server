@@ -1,6 +1,6 @@
 
 class Api::V1::RecipesController < ApplicationController
-    skip_before_action :authorized, only: [:searchapi, :create]
+    skip_before_action :authorized, only: [:searchapi, :create, :index, :destroy]
 
     def index
         recipes = Recipe.all
@@ -16,28 +16,7 @@ class Api::V1::RecipesController < ApplicationController
     def create
         
         recipe = Recipe.new(recipe_params)
-        
-        # recipe.calories = params[:recipe][:calories]
-        # recipe.cautions = params[:recipe][:cautions]
-        # recipe.cuisineType = params[:recipe][:cuisineType]
-        # recipe.dietLabels = params[:recipe][:dietLabels]
-        # recipe.digest = params[:recipe][:digest]
-        # recipe.dishType = params[:recipe][:dishType]
-        # recipe.healthLabels = params[:recipe][:healthLabels]
-        # recipe.image = params[:recipe][:image]
-        # recipe.ingredientLines = params[:recipe][:ingredientLines]
-        # recipe.ingredients = params[:recipe][:ingredients]
-        # recipe.label = params[:recipe][:label]
-        # recipe.meanType = params[:recipe][:meanType]
-        # recipe.shareAs = params[:recipe][:shareAs]
-        # recipe.source = params[:recipe][:source]
-        # recipe.totalDaily = params[:recipe][:totalDaily]
-        # recipe.totalNutrients = params[:recipe][:totalNutrients]
-        # recipe.totalTime = params[:recipe][:totalTime]
-        # recipe.totalWeight = params[:recipe][:totalWeight]
-        # recipe.uri = params[:recipe][:uri]
-        # recipe.url = params[:recipe][:url]
-        # recipe.yield = params[:recipe][:yield]
+    
 
         recipe.user_id = params[:user_id]
 

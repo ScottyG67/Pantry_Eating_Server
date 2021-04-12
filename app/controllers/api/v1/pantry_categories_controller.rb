@@ -1,8 +1,9 @@
 class Api::V1::PantryCategoriesController < ApplicationController
 
     def index
+        byebug
         categories = PantryCategory.all
-        render json: categories
+        render json: categories include: :pantry_items
     end
 
     def create
