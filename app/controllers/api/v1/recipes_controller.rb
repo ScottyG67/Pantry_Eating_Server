@@ -1,6 +1,6 @@
 
 class Api::V1::RecipesController < ApplicationController
-    skip_before_action :authorized, only: [:searchapi, :create, :index, :destroy]
+    skip_before_action :authorized, only: [:searchapi, :index, :destroy]
 
     def index
         recipes = Recipe.all
@@ -30,12 +30,17 @@ class Api::V1::RecipesController < ApplicationController
     end
 
     def destroy
+        
+        recipe = Recipe.find_by(id: params[:id])
         byebug
-        recipe = Recipe.find_by(id: 1)
+        recipe.destroy
+        render json: recipe
+
     end
      
     def searchapi 
         resp = RestClient.get "https://api.edamam.com/search?q=#{params['searchText']}&app_id=9db917fd&app_key=c621a1acced53c09facd07f43ef85b0d"
+        
         render json: resp
     end
 

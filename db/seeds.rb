@@ -10,6 +10,7 @@ PantryCategory.destroy_all
 PantryItem.destroy_all
 
 user1 = User.create(username: "Swedish Chef", email:"swedish@chef.com", password: "password")
+user2 = User.create(username: "Sgloyna", email:"scott.gloyna01@gmail.com", password: "password")
 
 category0 = PantryCategory.create(name: "None")
 category1 = PantryCategory.create(name: "Freezer")

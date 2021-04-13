@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :users, only: [:create] do
         resources :pantry_items
         resources :recipes
+        post '/item_search', to: 'pantry_items#searchapi'
       end
       resources :pantry_categories
       post '/login', to: 'auth#create'
