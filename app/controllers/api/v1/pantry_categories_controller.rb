@@ -8,14 +8,14 @@ class Api::V1::PantryCategoriesController < ApplicationController
     end
 
     def create
-        # byebug
-        # new_category = PantryCategory.new
-        # new_category.name = params["name"]
-        # if new_category.save
-        #     render json: new_category
-        # else
-        #     render json: {message:"failed to save"}
-        # end
+        byebug
+        new_category = PantryCategory.new
+        new_category.name = params[:name]
+        if new_category.save
+            render json: new_category
+        else
+            render json: {message:"failed to save"}
+        end
     end
 
     def destroy
