@@ -39,6 +39,14 @@ class Api::V1::PantryItemsController < ApplicationController
         end
     end
 
+    def destroy
+        
+        item = PantryItem.find_by(id: params[:id])
+        item.destroy
+        render json: item
+
+    end
+
     private
 
     def convert_api (resp)

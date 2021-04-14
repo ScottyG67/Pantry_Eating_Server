@@ -16,11 +16,15 @@ class Api::V1::RecipesController < ApplicationController
     def create
         
         recipe = Recipe.new(recipe_params)
-    
 
+        #the following are hashes with variable keys
+        recipe.digest = params[:recipe][:digest]
+        recipe.ingredients = params[:recipe][:ingredients]
+        recipe.totalDaily = params[:recipe][:totalDaily]
+        recipe.totalNutrients = params[:recipe][:totalNutrients]
+    
         recipe.user_id = params[:user_id]
 
-        # byebug
         if recipe.save
             render json: recipe
         else
@@ -32,7 +36,6 @@ class Api::V1::RecipesController < ApplicationController
     def destroy
         
         recipe = Recipe.find_by(id: params[:id])
-        byebug
         recipe.destroy
         render json: recipe
 
@@ -52,7 +55,27 @@ class Api::V1::RecipesController < ApplicationController
     end
 
     def recipe_params
-        params.require(:recipe).permit(:calories,:cautions,:cuisineType,:dietLabels,:digest,:dishType,:healthLabels,:image,:ingredientLines,:ingredients,:label,:meanType,:shareAs,:source,:totalDaily,:totalNutrients,:totalTime,:totalWeight,:uri,:url,:yield,:user_id)
+        params.require(:recipe)
+        .permit(
+            :calories,
+            :image,
+            :label,
+            :meanType,
+            :shareAs,
+            :source,
+            :totalTime,
+            :totalWeight,
+            :uri,
+            :url,
+            :yield,
+            :user_id,
+            :cautions => [],
+            :cuisineType => [],
+            :dietLabels => [],
+            :dishType => [],
+            :healthLabels => [],
+            :ingredientLines => []
+        )
     end
 
 end
