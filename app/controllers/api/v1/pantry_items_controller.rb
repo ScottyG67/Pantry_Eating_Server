@@ -1,8 +1,9 @@
 class Api::V1::PantryItemsController < ApplicationController
 
     def index 
-        items = User.find_by(id: params[:user_id]).pantry_items
-        render json: items
+        @pantry_items = User.find_by(id: params[:user_id]).pantry_items
+        byebug
+        render json: @pantry_items 
     end
 
 

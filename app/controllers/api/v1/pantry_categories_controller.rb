@@ -1,20 +1,21 @@
 class Api::V1::PantryCategoriesController < ApplicationController
 
     def index
-        byebug
-        categories = PantryCategory.all
-        render json: categories include: :pantry_items
+        # byebug
+        @pantry_categories = User.find_by(id: params[:user_id]).pantry_categories.uniq
+        # byebug
+        render json: @pantry_categories 
     end
 
     def create
-        byebug
-        new_category = PantryCategory.new
-        new_category.name = params["name"]
-        if new_category.save
-            render json: new_category
-        else
-            render json: {"failed to save"}
-        end
+        # byebug
+        # new_category = PantryCategory.new
+        # new_category.name = params["name"]
+        # if new_category.save
+        #     render json: new_category
+        # else
+        #     render json: {message:"failed to save"}
+        # end
     end
 
     def destroy

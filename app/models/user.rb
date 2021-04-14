@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
     has_many :pantry_items, dependent: :destroy
     has_many :recipes, dependent: :destroy
+    has_many :pantry_categories, through: :pantry_items
 
     
 end
