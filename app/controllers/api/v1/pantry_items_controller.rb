@@ -48,6 +48,17 @@ class Api::V1::PantryItemsController < ApplicationController
 
     end
 
+    def update
+        item = PantryItem.find_by(id: params[:pantry_item][:id])
+        item.pantry_category_id = params[:category_id]
+        if item.save
+            render json: item
+        else
+            render json: {error: "There was an error"}
+        end
+    end
+
+
     private
 
     def convert_api (resp)
