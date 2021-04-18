@@ -2,7 +2,6 @@ class Api::V1::PantryItemsController < ApplicationController
 
     def index 
         @pantry_items = User.find_by(id: params[:user_id]).pantry_items
-        byebug
         render json: @pantry_items 
     end
 
@@ -22,17 +21,22 @@ class Api::V1::PantryItemsController < ApplicationController
 
     def create
         #default assign to "none" category
-        cat = PantryCategory.find_by(name: "None")
+        if params[:category_id]
+            cat = PantryCategory.find_by(id: params[:category_id])
+        else
+            cat = PantryCategory.find_by(name: "None")
+        end
         #see if already exists
-        item = PantryItem.find_or_initialize_by(ext_id: params[:ext_id], user_id: params[:user_id])
-        item.name = params[:name]
-        item.ext_id = params[:ext_id]
-        item.image = params[:image]
-        item.foodContentsLabel=params[:foodContentsLabel]
+        item = PantryItem.find_or_initialize_by(ext_id: params[:pantry_item][:ext_id], user_id:[:user_id])
+        
+        item.name = params[:pantry_item][:name]
+        item.ext_id = params[:pantry_item][:ext_id]
+        item.image = params[:pantry_item][:image]
+        item.foodContentsLabel=params[:pantry_item][:foodContentsLabel]
         item.pantry_category = cat
         item.user_id=params[:user_id]
+
         if item.save
-            
             render json: item
         else
             
@@ -50,7 +54,8 @@ class Api::V1::PantryItemsController < ApplicationController
 
     def update
         item = PantryItem.find_by(id: params[:pantry_item][:id])
-        item.pantry_category_id = params[:category_id]
+        
+        item.pantry_category_id = params[:pantry_item][:pantry_category_id]
         if item.save
             render json: item
         else
