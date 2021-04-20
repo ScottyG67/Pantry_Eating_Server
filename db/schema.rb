@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_12_195806) do
+ActiveRecord::Schema.define(version: 2021_04_20_154836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,15 @@ ActiveRecord::Schema.define(version: 2021_04_12_195806) do
     t.index ["user_id"], name: "index_recipes_on_user_id"
   end
 
+  create_table "user_pantry_categories", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "pantry_category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["pantry_category_id"], name: "index_user_pantry_categories_on_pantry_category_id"
+    t.index ["user_id"], name: "index_user_pantry_categories_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -75,4 +84,6 @@ ActiveRecord::Schema.define(version: 2021_04_12_195806) do
   add_foreign_key "pantry_items", "pantry_categories"
   add_foreign_key "pantry_items", "users"
   add_foreign_key "recipes", "users"
+  add_foreign_key "user_pantry_categories", "pantry_categories"
+  add_foreign_key "user_pantry_categories", "users"
 end

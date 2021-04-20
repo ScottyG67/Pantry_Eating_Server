@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+UserPantryCategory.destroy_all
 User.destroy_all
 PantryCategory.destroy_all
 PantryItem.destroy_all
@@ -19,4 +20,17 @@ category3 = PantryCategory.create(name: "Fruit/Veggie")
 category4 = PantryCategory.create(name: "Meat")
 category5 = PantryCategory.create(name: "Packaged")
 
-item2 = PantryItem.create(name:"Peanut Butter", description: "Creamy", upc: "051500720011", user: user1, pantry_category: category5)
+category_list = [category0,category1,category2,category3,category4,category5]
+user_list = [user1,user2]
+
+user_list.each do |user|
+    category_list.each do |category|
+        join = UserPantryCategory.new
+        join.user = user
+        join.pantry_category = category
+        join.save
+    end
+end
+
+
+item2 = PantryItem.create(name:"Peanut Butter", description: "Creamy", upc: "051500720011", user: user2, pantry_category: category5)

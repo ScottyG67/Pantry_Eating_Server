@@ -1,7 +1,6 @@
 class Api::V1::PantryCategoriesController < ApplicationController
 
     def index
-        # byebug
         @pantry_categories = User.find_by(id: params[:user_id]).pantry_categories.uniq
         # byebug
         render json: @pantry_categories 
@@ -10,7 +9,12 @@ class Api::V1::PantryCategoriesController < ApplicationController
     def create
         new_category = PantryCategory.new
         new_category.name = params[:name]
+        user = User.find_by(id: params[:user_id])
         if new_category.save
+            join = UserPantryCategory.new
+            join.user = user
+            join.pantry_category=new_category
+            join.save
             render json: new_category
         else
             render json: {message:"failed to save"}
