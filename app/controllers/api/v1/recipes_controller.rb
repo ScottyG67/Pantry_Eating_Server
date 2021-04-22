@@ -3,7 +3,9 @@ class Api::V1::RecipesController < ApplicationController
     skip_before_action :authorized, only: [:searchapi, :index, :destroy]
 
     def index
-        recipes = Recipe.all
+        user = User.all.find_by(id: params[:user_id])
+        recipes = user.recipes
+        byebug
         render json: recipes
     end
 
