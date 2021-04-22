@@ -16,6 +16,11 @@ class Api::V1::UsersController < ApplicationController
       end
     end
 
+    def destroy
+      user = User.find_by(id: params[:id])
+      byebug
+    end 
+
   
     private
   

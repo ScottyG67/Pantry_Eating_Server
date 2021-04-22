@@ -5,7 +5,6 @@ class Api::V1::RecipesController < ApplicationController
     def index
         user = User.all.find_by(id: params[:user_id])
         recipes = user.recipes
-        byebug
         render json: recipes
     end
 
