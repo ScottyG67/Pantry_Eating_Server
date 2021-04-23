@@ -8,7 +8,7 @@ class Api::V1::PantryItemsController < ApplicationController
 
     def searchapi
         # byebug
-        resp = RestClient.get "https://api.edamam.com/api/food-database/v2/parser?app_id=c1dce378&app_key=b4bb571fe976193c372bdcda759ddd73&#{params[:searchType]}=#{params[:search]}"
+        resp = RestClient.get "https://api.edamam.com/api/food-database/v2/parser?app_id=#{Rails.application.credentials.EDAMAM_APP_ID}&app_key=#{Rails.application.credentials.EDAMAM_KEY}&#{params[:searchType]}=#{params[:search]}"
         convert_api(resp)
         # byebug
         # item.name = resp[:food][:label]

@@ -43,8 +43,7 @@ class Api::V1::RecipesController < ApplicationController
     end
      
     def searchapi 
-        resp = RestClient.get "https://api.edamam.com/search?q=#{params['searchText']}&app_id=9db917fd&app_key=c621a1acced53c09facd07f43ef85b0d"
-        
+        resp = RestClient.get "https://api.edamam.com/search?q=#{params['searchText']}&app_id=#{Rails.application.credentials.EDAMAM_APP_ID}&app_key=#{Rails.application.credentials.EDAMAM_KEY}"
         render json: resp
     end
 

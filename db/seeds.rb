@@ -11,7 +11,6 @@ PantryCategory.destroy_all
 PantryItem.destroy_all
 
 user1 = User.create(username: "Swedish Chef", email:"swedish@chef.com", password: "password")
-user2 = User.create(username: "Sgloyna", email:"scott.gloyna01@gmail.com", password: "password")
 
 category0 = PantryCategory.create(name: "None")
 category1 = PantryCategory.create(name: "Freezer")
@@ -21,7 +20,7 @@ category4 = PantryCategory.create(name: "Meat")
 category5 = PantryCategory.create(name: "Packaged")
 
 category_list = [category0,category1,category2,category3,category4,category5]
-user_list = [user1,user2]
+user_list = [user1]
 
 user_list.each do |user|
     category_list.each do |category|
@@ -33,4 +32,4 @@ user_list.each do |user|
 end
 
 
-item2 = PantryItem.create(name:"Peanut Butter", description: "Creamy", upc: "051500720011", user: user2, pantry_category: category5)
+item2 = PantryItem.create(name:"Peanut Butter", description: "Creamy", upc: "051500720011", user: user1, pantry_category: category5)

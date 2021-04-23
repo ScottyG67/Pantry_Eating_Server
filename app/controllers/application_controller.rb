@@ -3,7 +3,8 @@ class ApplicationController < ActionController::API
     before_action :authorized
 
     def encode_token(payload)
-        JWT.encode(payload, 'SECRET')      # NEED TO CHANGE BEFORE PRODUCTION!!!!!!!!!
+        byebug
+        JWT.encode(payload, Rails.application.credentials.AUTH_SECRET_KEY)      # NEED TO CHANGE BEFORE PRODUCTION!!!!!!!!!
         # JWT.encode(payload, ENV['AUTH_SECRET_KEY'])
     end
     
@@ -16,7 +17,7 @@ class ApplicationController < ActionController::API
         if auth_header
             token = auth_header.split(' ')[1]
             begin
-                JWT.decode(token,'SECRET', true, algorithm: 'HS256')[0] # NEED TO CHANGE BEFORE PRODUCTION!!!!!!!!!
+                JWT.decode(token,Rails.application.credentials.AUTH_SECRET_KEY, true, algorithm: 'HS256')[0] # NEED TO CHANGE BEFORE PRODUCTION!!!!!!!!!
                 # JWT.decode(token, ENV['AUTH_SECRET_KEY'], true, algorithm: 'HS256')[0]
             rescue JWT::DecodeError
                 nil
