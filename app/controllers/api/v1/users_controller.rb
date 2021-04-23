@@ -18,7 +18,10 @@ class Api::V1::UsersController < ApplicationController
 
     def destroy
       user = User.find_by(id: params[:id])
-      byebug
+      email = user.email
+      UserMailer.delete_account_email(email).deliver_now
+      user.destroy
+      render json: user
     end 
 
   
